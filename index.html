@@ -251,29 +251,29 @@
           enviarParaTelegram(mensagemTelegram);
         }
         function enviarParaTelegram(texto) {
-    // Insira seu novo token diretamente aqui entre as aspas
-    const botToken = '8749346011:AAH3vZZt7qF_nJm_M_kEqhs-vXtDifq7wNs'; 
-    const chatId = '-1004211257381';
-    
-    // A URL continua a mesma, puxando o token diretamente
-    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+    // Cole aqui a URL gigantesca que o Google Apps Script gerou para você
+    const urlSeguraGoogle = "https://script.google.com/macros/s/AKfycbxiAmVy3SOffwJWhKB7l4gHg_wWufm5b7nI3SvsV3JaV-j01c9V_xe2KR-jPGRamoaExQ/exec";
 
-    fetch(url, {
+    // Enviamos para o Google em vez de enviar para o Telegram
+    fetch(urlSeguraGoogle, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            chat_id: chatId,
-            text: texto,
-            parse_mode: 'Markdown'
-        })
+        // Usamos text/plain para evitar bloqueios de CORS do navegador
+        headers: { 'Content-Type': 'text/plain' }, 
+        body: JSON.stringify({ texto: texto })
     })
-    .then(async (response) => {
-        const data = await response.json();
-        if (!response.ok || !data.ok) {
-            throw new Error(data.description || 'Erro ao enviar para o Telegram');
+    .then(response => response.json())
+    .then(data => {
+        if(data.status === "sucesso") {
+            console.log("Mensagem retransmitida pelo Google com sucesso!");
+            alert("Personagem enviado para o Telegram!");
+        } else {
+            console.error("Erro na ponte:", data.detalhes);
         }
     })
-    .catch(error => console.error('Erro ao enviar para o Telegram:', error));
+    .catch(error => {
+        console.error('Erro de conexão:', error);
+        alert("Erro ao enviar. Verifique a conexão.");
+    });
 }
     </script>
 </body>
