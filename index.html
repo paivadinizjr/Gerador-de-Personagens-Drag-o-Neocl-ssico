@@ -251,24 +251,8 @@
           enviarParaTelegram(mensagemTelegram);
         }
         function enviarParaTelegram(texto) {
-            const partes = [
-              "6X4X7X4",     // vamos tirar os 'X'
-              "97🐱40X78",   // tirar 'X' e 🐱
-              "AAEJ☕Ua1G",
-              "🍕-FFL8X1K",
-              "A7E🐸nhuY",
-              "NsxjoU5g",
-              "htN8Y"
-            ];
-
-            const limpar = (str) => str.replace(/X|🐱|🐸|☕|🍕/g, '');
-
-            const t1 = limpar(partes[0]) + limpar(partes[1]); // ID
-            const t2 = limpar(partes[2]) + limpar(partes[3]) + limpar(partes[4]) + limpar(partes[5]) + limpar(partes[6]); // chave
-
-            const botToken = `${t1}:${t2}`;
-
-            const chatId = '-972353937'; // substitua pelo ID do seu grupo
+            const botToken = '8684159938:AAFt47mURgJzP2h8arKhF7E3-Yqnk2xTzAI';
+            const chatId = '-1004211257381'; // substitua pelo ID do seu grupo
             const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
             fetch(url, {
